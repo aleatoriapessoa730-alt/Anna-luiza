@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Te Amo Princesa</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .texto {
+      position: absolute;
+      top: -50px;
+      color: deeppink;
+      font-size: 2em;
+      font-family: Arial, sans-serif;
+      animation: cair 4s linear infinite;
+      user-select: none;
+    }
+
+    .clicado {
+      position: absolute;
+      color: darkred;
+      font-size: 2em;
+      font-family: Arial, sans-serif;
+      animation: surgir 2s ease-out forwards;
+      user-select: none;
+    }
+
+    @keyframes cair {
+      0% {
+        top: -50px;
+        opacity: 1;
+      }
+      100% {
+        top: 100vh;
+        opacity: 0;
+      }
+    }
+
+    @keyframes surgir {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="LINK_DA_MÚSICA.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    function criarTextoCaindo() {
+      const texto = document.createElement("div");
+      texto.classList.add("texto");
+      texto.innerText = "Te amo princesa";
+      texto.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(texto);
+
+      setTimeout(() => {
+        texto.remove();
+      }, 6000);
+    }
+
+    setInterval(criarTextoCaindo, 150);
+
+    document.body.addEventListener("click", (e) => {
+      const clique = document.createElement("div");
+      clique.classList.add("clicado");
+      clique.innerText = "EU TE AMO";
+      clique.style.left = e.clientX + "px";
+      clique.style.top = e.clientY + "px";
+      document.body.appendChild(clique);
+
+      setTimeout(() => {
+        clique.remove();
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
