@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Te Amo Princesa + Fogos Dengosa</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      position: relative;
+      user-select: none;
+    }
+
+    .texto {
+      position: absolute;
+      top: -50px;
+      color: pink;
+      font-size: 2em;
+      font-family: Arial, sans-serif;
+      animation: cair 4s linear infinite;
+      pointer-events: none;
+    }
+
+    .clicado {
+      position: absolute;
+      color: pink;
+      font-size: 2em;
+      font-family: Arial, sans-serif;
+      animation: surgir 2s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes cair {
+      0% {
+        top: -50px;
+        opacity: 1;
+      }
+      100% {
+        top: 100vh;
+        opacity: 0;
+      }
+    }
+
+    @keyframes surgir {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="LINK_DA_MÚSICA.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    // Texto caindo
+    function criarTextoCaindo() {
+      const texto = document.createElement("div");
+      texto.classList.add("texto");
+      texto.innerText = "Te amo princesa";
+      texto.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(texto);
+
+      setTimeout(() => {
+        texto.remove();
+      }, 4000);
+    }
+
+    setInterval(criarTextoCaindo, 600);
+
+    // Clique mostrando "EU TE AMO"
+    document.body.addEventListener("click", (e) => {
+      const clique = document.createElement("div");
+      clique.classList.add("clicado");
+      clique.innerText = "EU TE AMO";
+      clique.style.left = e.clientX + "px";
+      clique.style.top = e.clientY + "px";
+      document.body.appendChild(clique);
+
+      setTimeout(() => {
+        clique.remove();
+      }, 2000);
+
+      // Fogos de artifício "dengosa"
+      const numFogos = 10; // Quantidade de "dengosas"
+
+      for (let i = 0; i < numFogos; i++) {
+        const fogo = document.createElement("div");
+        fogo.innerText = "dengosa";
+        fogo.style.position = "absolute";
+        fogo.style.color = "pink";
+        fogo.style.fontSize = "1.5em";
+        fogo.style.fontFamily = "Arial, sans-serif";
+        fogo.style.left = e.clientX + (Math.random() * 100 - 50) + "px";
+        fogo.style.top = e.clientY + (Math.random() * 100 - 50) + "px";
+        fogo.style.userSelect = "none";
+        fogo.style.pointerEvents = "none";
+        fogo.style.opacity = "1";
+        fogo.style.transition = "transform 1s ease-out, opacity 1s ease-out";
+
+        document.body.appendChild(fogo);
+
+        setTimeout(() => {
+          fogo.style.transform = "scale(3)";
+          fogo.style.opacity = "0";
+        }, 50);
+
+        setTimeout(() => {
+          fogo.remove();
+        }, 1100);
+      }
+    });
+  </script>
+</body>
+</html>
